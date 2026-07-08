@@ -1,0 +1,26 @@
+{
+  "name": "Chahat Yadav",
+  "age": 21,
+  "isStudent": true,
+  "skills": [
+    "Python",
+    "Linux",
+    "Docker",
+    "Kubernetes"
+  ],
+  "address": {
+    "city": "Panipat",
+    "state": "Haryana",
+    "country": "India"
+  },
+  "projects": [
+    {
+      "name": "Log Analyzer",
+      "language": "Python"
+    },
+    {
+      "name": "Kubernetes Automation",
+      "language": "Python"
+    }
+  ]
+}
