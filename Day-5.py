@@ -253,3 +253,35 @@
 #        print("image update sucess")
 #     else:
 #        print("image update failed")
+
+from kubernetes import client, config
+import subprocess
+
+config.load_kube_config()
+
+v1 = client.CoreV1Api()
+
+keyword = input("Keyword: ")
+
+pods = v1.list_pod_for_all_namespaces()
+
+for pod in pods.items:
+    name = pod.metadata.name
+    namespace = pod.metadata.namespace
+
+    output = subprocess.run(
+        ["kubectl", "logs", name, "-n", namespace],
+        capture_output=True,
+        text=True
+    )
+
+    if output.returncode != 0:
+        continue
+
+    if keyword in output.stdout:
+        print(f"\nPod: {name}")
+        print(f"Namespace: {namespace}")
+
+        for line in output.stdout.splitlines():
+            if keyword in line:
+                print(line)
