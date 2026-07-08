@@ -203,27 +203,53 @@
 #         if not i.startswith("_"):
 #             f.write(str(i)+"\n")
 
-from kubernetes import client, config
+#-------get secret data--------
 
-config.load_kube_config()
+# from kubernetes import client, config
 
-v1 = client.CoreV1Api()
-ret = v1.list_namespaced_secret(namespace="default")
+# config.load_kube_config()
 
-name_list = []
-namespace_list = []
+# v1 = client.CoreV1Api()
+# ret = v1.list_namespaced_secret(namespace="default")
 
-for i in ret.items:
-    name = i.metadata.name
-    namespace = i.metadata.namespace
+# name_list = []
+# namespace_list = []
 
-    name_list.append(name)
-    namespace_list.append(namespace)
+# for i in ret.items:
+#     name = i.metadata.name
+#     namespace = i.metadata.namespace
 
-    if not i.data:
-        print(f"{namespace}/{name}: No data found")
-        continue
+#     name_list.append(name)
+#     namespace_list.append(namespace)
 
-    for key, value in i.data.items():
-        print(f"Key: {key}")
-        print(f"Value (Base64): {value}")
+#     if not i.data:
+#         print(f"{namespace}/{name}: No data found")
+#         continue
+
+#     for key, value in i.data.items():
+#         print(f"Key: {key}")
+#         print(f"Value (Base64): {value}")
+
+
+
+# -------update image of a deployment
+
+
+# import subprocess
+# from kubernetes import client , config
+# config.load_kube_config()
+
+# apps_v1=client.AppsV1Api()
+
+# deployments = apps_v1.list_deployment_for_all_namespaces()
+# for i in deployments.items:
+#     name=i.metadata.name
+#     container_image=i.spec.template.spec.containers[0].name
+#     namespace=i.metadata.namespace
+#     image="alpine"
+#     output=subprocess.run(["kubectl","set","image","deployment",name,f"{container_image}={image}","-n",namespace],text=True,capture_output=True)
+#     print(output.stderr)
+#     if output.returncode == 0:
+#        print("image update sucess")
+#     else:
+#        print("image update failed")
