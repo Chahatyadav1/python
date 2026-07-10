@@ -1,31 +1,40 @@
-2026-07-07 09:00:01 INFO Application started
-2026-07-07 09:00:03 INFO Loading configuration
-2026-07-07 09:00:04 INFO Configuration loaded successfully
-2026-07-07 09:00:07 INFO Connecting to PostgreSQL database
-2026-07-07 09:00:09 WARNING Database connection took longer than expected
-2026-07-07 09:00:10 INFO Database connected
-2026-07-07 09:00:15 INFO Starting HTTP server on port 8080
-2026-07-07 09:01:02 INFO Received request GET /health
-2026-07-07 09:01:02 INFO Health check passed
-2026-07-07 09:02:18 INFO Received request POST /login
-2026-07-07 09:02:19 WARNING Invalid login attempt for user admin
-2026-07-07 09:02:20 INFO User authentication successful
-2026-07-07 09:03:10 INFO Received request GET /api/orders
-2026-07-07 09:03:12 ERROR Failed to fetch orders from database
-2026-07-07 09:03:13 INFO Retrying database query
-2026-07-07 09:03:15 INFO Query executed successfully
-2026-07-07 09:04:02 INFO Starting scheduled backup
-2026-07-07 09:04:30 WARNING Backup size exceeds expected threshold
-2026-07-07 09:04:55 INFO Backup completed
-2026-07-07 09:05:01 INFO Cleaning temporary files
-2026-07-07 09:05:05 INFO Temporary files removed
-2026-07-07 09:05:15 ERROR Unable to send notification email
-2026-07-07 09:05:18 INFO Notification service retry initiated
-2026-07-07 09:05:20 INFO Notification sent successfully
-2026-07-07 09:06:01 INFO Received request GET /metrics
-2026-07-07 09:06:02 INFO Metrics exported
-2026-07-07 09:06:30 WARNING CPU usage above 85%
-2026-07-07 09:06:45 WARNING Memory usage above 80%
-2026-07-07 09:07:01 INFO Autoscaler triggered
-2026-07-07 09:07:15 INFO New replica created
-2026-07-07 09:08:00 INFO Application running normally
+2026-07-10 09:00:01 INFO  auth-service        192.168.1.10 User login successful username=alice
+2026-07-10 09:00:05 INFO  web-server          10.244.1.15 GET /index.html 200
+2026-07-10 09:00:08 WARN  auth-service        203.0.113.15 Failed login attempt username=root
+2026-07-10 09:00:12 ERROR payment-service     192.168.1.20 Database connection timeout
+2026-07-10 09:00:18 INFO  nginx               10.244.2.8 GET /healthz 200
+2026-07-10 09:00:22 ERROR payment-service     192.168.1.20 Database connection timeout
+2026-07-10 09:00:30 INFO  api-server          172.16.10.5 POST /api/orders 201
+2026-07-10 09:00:37 WARN  web-server          203.0.113.15 Slow response time 2500ms
+2026-07-10 09:00:45 ERROR inventory-service   10.244.1.25 Out of memory
+2026-07-10 09:00:53 INFO  auth-service        192.168.1.10 User logout username=alice
+2026-07-10 09:01:01 INFO  api-server          172.16.10.5 GET /products 200
+2026-07-10 09:01:08 ERROR payment-service     192.168.1.20 Database connection timeout
+2026-07-10 09:01:15 INFO  nginx               10.244.2.8 GET /metrics 200
+2026-07-10 09:01:20 WARN  auth-service        198.51.100.7 Invalid JWT token
+2026-07-10 09:01:26 INFO  web-server          192.168.1.10 GET /login 200
+2026-07-10 09:01:31 ERROR api-server          172.16.10.5 Internal server error
+2026-07-10 09:01:42 INFO  payment-service     192.168.1.20 Payment completed order=1001
+2026-07-10 09:01:50 WARN  nginx               203.0.113.15 High latency backend
+2026-07-10 09:02:02 ERROR inventory-service   10.244.1.25 Out of memory
+2026-07-10 09:02:15 INFO  auth-service        198.51.100.7 User login successful username=bob
+2026-07-10 09:02:21 INFO  web-server          192.168.1.10 GET /dashboard 200
+2026-07-10 09:02:35 ERROR payment-service     192.168.1.20 Database connection timeout
+2026-07-10 09:02:48 WARN  api-server          172.16.10.5 Rate limit exceeded
+2026-07-10 09:03:00 INFO  nginx               10.244.2.8 GET /favicon.ico 404
+2026-07-10 09:03:12 ERROR payment-service     192.168.1.20 Database connection timeout
+2026-07-10 09:03:26 INFO  auth-service        192.168.1.10 Password changed username=alice
+2026-07-10 09:03:40 WARN  payment-service     198.51.100.7 Retrying payment request
+2026-07-10 09:03:55 INFO  api-server          172.16.10.5 GET /users 200
+2026-07-10 09:04:08 ERROR inventory-service   10.244.1.25 Out of memory
+2026-07-10 09:04:20 INFO  web-server          192.168.1.10 GET /logout 302
+2026-07-10 09:04:35 ERROR payment-service     192.168.1.20 Database connection timeout
+2026-07-10 09:04:48 WARN  auth-service        203.0.113.15 Multiple failed logins
+2026-07-10 09:05:01 INFO  nginx               10.244.2.8 GET /status 200
+2026-07-10 09:05:12 ERROR api-server          172.16.10.5 Internal server error
+2026-07-10 09:05:26 INFO  payment-service     192.168.1.20 Payment completed order=1002
+2026-07-10 09:05:40 WARN  inventory-service   10.244.1.25 Disk usage above 90%
+2026-07-10 09:05:55 INFO  auth-service        198.51.100.7 User logout username=bob
+2026-07-10 09:06:10 ERROR payment-service     192.168.1.20 Database connection timeout
+2026-07-10 09:06:22 INFO  web-server          192.168.1.10 GET /profile 200
+2026-07-10 09:06:35 WARN  api-server          172.16.10.5 Client disconnected
