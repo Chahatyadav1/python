@@ -31,3 +31,27 @@
 #             count1[error]+=1
 # print(count)
 # print(count1.most_common(1))
+
+# import psutil
+
+# for partition in psutil.disk_partitions():
+#     ob=psutil.disk_usage(partition.mountpoint)
+#     if ob.percent > 80.0:
+#         print("Alert")
+
+import psutil
+cpu_percent=[]
+memory_percent=[]
+for pid in psutil.pids():
+    try:
+        p = psutil.Process(pid)
+        cpu_percent.append([p.cpu_percent(interval=1.0),pid])
+        memory_percent.append([p.memory_percent(),pid])
+    except (psutil.AccessDenied, psutil.NoSuchProcess):
+        continue
+top_p=cpu_percent.sort(reverse=True)
+top_process=top_p[:5]
+top_m=memory_percent[:5].sort(reverse=True)
+top_memory=top_m[:5]
+print(top_process)
+print(top_memory)
