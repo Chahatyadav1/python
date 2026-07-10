@@ -49,9 +49,9 @@ for pid in psutil.pids():
         memory_percent.append([p.memory_percent(),pid])
     except (psutil.AccessDenied, psutil.NoSuchProcess):
         continue
-top_p=cpu_percent.sort(reverse=True)
-top_process=top_p[:5]
-top_m=memory_percent[:5].sort(reverse=True)
-top_memory=top_m[:5]
+cpu_percent.sort(reverse=True)
+top_process=cpu_percent[:5]
+memory_percent.sort(reverse=True)
+top_memory=memory_percent[:5]
 print(top_process)
 print(top_memory)
