@@ -1,13 +1,12 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: myapp
-  labels:
-    app.kubernetes.io/name: myapp
+  name: controller
   namespace: default
 spec:
+  serviceAccountName: controller
   containers:
-  - name: myapp
-    image: nginx
+  - name: controller
+    image: docker.io/chahatyadav1/label-controller:v1.0.0
     ports:
-      - containerPort: 80
+      - containerPort: 8000
