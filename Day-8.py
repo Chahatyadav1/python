@@ -76,11 +76,42 @@
 #             print(f"Fatal error:{a.stderr}")
 
 import yaml
+def compare(old,new,path=""):
+    if isinstance(old, dict) and isinstance(new,dict):
+        keys = set(old.keys()) | set(new.keys()) 
+        for key in keys:
+            new_path=f"{path}.{key}" if path else key
+            if key not in old:
+                print(f"{new_path} added")
+                print(new[key])
+                continue
+            if key not in new:
+                print(f"{new_path}: removed")
+                print(old[key])
+                continue
+            compare(old[key],new[key])
+    elif isinstance(old, list) and isinstance(new, list):
+        max_len = max(len(old), len(new))
+        for i in range(max_len):
+            new_path = f"{path}[{i}]"
+            if i >= len(old):
+                print(f"{new_path} added:")
+                print(f"  {new[i]}")
+                continue
+
+            if i >= len(new):
+                print(f"{new_path} removed:")
+                print(f"  {old[i]}")
+                continue
+            compare(old[i], new[i], new_path)
+    else:
+        if old != new:
+            print(f"{path} changed:")
+            print(f"  {old} -> {new}")
+
 
 with open("pod.yaml") as o:
     old=yaml.safe_load(o)
 with open("pod1.yaml") as n:
     new=yaml.safe_load(n)
-for data in old:
-    if old[data] != new[data]:
-        print(f"{old[data]} -> {new[data]}")
+compare(old,new)
