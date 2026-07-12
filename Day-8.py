@@ -75,43 +75,67 @@
 #         else:
 #             print(f"Fatal error:{a.stderr}")
 
-import yaml
-def compare(old,new,path=""):
-    if isinstance(old, dict) and isinstance(new,dict):
-        keys = set(old.keys()) | set(new.keys()) 
-        for key in keys:
-            new_path=f"{path}.{key}" if path else key
-            if key not in old:
-                print(f"{new_path} added")
-                print(new[key])
-                continue
-            if key not in new:
-                print(f"{new_path}: removed")
-                print(old[key])
-                continue
-            compare(old[key],new[key])
-    elif isinstance(old, list) and isinstance(new, list):
-        max_len = max(len(old), len(new))
-        for i in range(max_len):
-            new_path = f"{path}[{i}]"
-            if i >= len(old):
-                print(f"{new_path} added:")
-                print(f"  {new[i]}")
-                continue
+# import yaml
 
-            if i >= len(new):
-                print(f"{new_path} removed:")
-                print(f"  {old[i]}")
-                continue
-            compare(old[i], new[i], new_path)
-    else:
-        if old != new:
-            print(f"{path} changed:")
-            print(f"  {old} -> {new}")
+# def compare(old,new,path=""):
+#     if isinstance(old, dict) and isinstance(new,dict):
+#         keys = set(old.keys()) | set(new.keys()) 
+#         for key in keys:
+#             new_path=f"{path}.{key}" if path else key
+#             if key not in old:
+#                 print(f"{new_path} added")
+#                 print(new[key])
+#                 continue
+#             if key not in new:
+#                 print(f"{new_path}: removed")
+#                 print(old[key])
+#                 continue
+#             compare(old[key],new[key])
+#     elif isinstance(old, list) and isinstance(new, list):
+#         max_len = max(len(old), len(new))
+#         for i in range(max_len):
+#             new_path = f"{path}[{i}]"
+#             if i >= len(old):
+#                 print(f"{new_path} added:")
+#                 print(f"  {new[i]}")
+#                 continue
 
+#             if i >= len(new):
+#                 print(f"{new_path} removed:")
+#                 print(f"  {old[i]}")
+#                 continue
+#             compare(old[i], new[i], new_path)
+#     else:
+#         if old != new:
+#             print(f"{path} changed:")
+#             print(f"  {old} -> {new}")
+# with open("pod.yaml") as o:
+#     old=yaml.safe_load(o)
+# with open("pod1.yaml") as n:
+#     new=yaml.safe_load(n)
+# compare(old,new)
 
-with open("pod.yaml") as o:
-    old=yaml.safe_load(o)
-with open("pod1.yaml") as n:
-    new=yaml.safe_load(n)
-compare(old,new)
+# import requests
+
+# a=requests.get("https://jsonplaceholder.typicode.com")
+# if a.status_code == 200 :
+#     print("sucess")
+#     print(a)
+# payload = {'key1': 'value1', 'key2': 'value2'}
+# r = requests.get('https://httpbin.org/get', params=payload)
+# print(r.url)
+# print(r.text)
+# r = requests.get('https://api.github.com/events')
+# print(r.json())
+# r = requests.post('https://httpbin.org/post', data=payload)
+# print(r.headers)
+
+# import requests
+# import os
+# token = os.getenv("GITHUB_TOKEN")
+# headers = {
+#     "Authorization": f"Bearer {token}",
+#     "Accept": "application/vnd.github+json",
+# }
+# response=requests.get("https://api.github.com/rate_limit")
+# print(response.json())
