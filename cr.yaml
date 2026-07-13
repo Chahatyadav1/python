@@ -1,0 +1,9 @@
+apiVersion: "stable.com/v1"
+kind: WebApp
+metadata:
+  name: demo-cr
+  namespace: default
+spec:
+  image: nginx
+  port: 80
+  replicas: 2
