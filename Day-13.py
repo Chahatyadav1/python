@@ -15,7 +15,8 @@ v1 = client.AppsV1Api()
 w = watch.Watch()
 for event in w.stream(v1.list_deployment_for_all_namespaces, _request_timeout=60):
     lb = event["object"].metadata.labels or {}
-    if lb.get("inject-sidecar") == "true":
+    containers = event["object"].spec.template.spec.containers
+    if lb.get("inject-sidecar") == "true" and not any (c.name == "logger" for c in containers):
         body={
             "spec": {
                 "template": {
@@ -23,7 +24,8 @@ for event in w.stream(v1.list_deployment_for_all_namespaces, _request_timeout=60
                         "containers": [
                             {
                              "name": "logger",
-                             "image": "busybox"
+                             "image": "busybox",
+                             "command": ["sh","-c","sleep 1d"]
                             }
                         ]
                     }
