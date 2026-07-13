@@ -1,6 +1,9 @@
 from kubernetes import client, config, watch
 import subprocess
+import logging
 from flask import Flask
+logger = logging.getLogger(__name__)
+logging.basicConfig(level=logging.INFO,format='%(asctime)s %(levelname)-8s %(name)-15s %(message)s')
 config.load_incluster_config()
 app=Flask(__name__)
 v1 = client.CoreV1Api()
@@ -12,7 +15,7 @@ for event in w.stream(v1.list_pod_for_all_namespaces, _request_timeout=60):
     if "run" not in labels:
         ob=subprocess.run(["kubectl","patch","pod",event['object'].metadata.name,"-p",'{"metadata":{"labels":{"run":"tested"}}}',f"-n{event['object'].metadata.namespace}",],capture_output=True,text=True)
         if ob.returncode == 0:
-            print("Successfully patched")
+            logger.info("Pached sucessfully")
         else:
             print(ob.stderr)
     count -= 1

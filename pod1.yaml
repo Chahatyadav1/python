@@ -3,11 +3,11 @@ kind: Pod
 metadata:
   name: myapp
   labels:
-    app.kubernetes.io/name: myapp
+    "inject-sidecar": 'true'
   namespace: default
 spec:
   containers:
-  - name: myapp
+  - name: logger1
     image: alpine
     ports:
       - containerPort: 80
