@@ -1,0 +1,29 @@
+git log --since="10 days"
+git log --reverse --stat
+git log --grep "pattern"
+git log --oneline --graph
+git diff          // diff bw staging and working dir 
+git rm --cache
+git mv hello.txt new.txt       // change name after stage 
+git status -s
+git log -S"pattern" --patch // patch for detail actual code change 
+git branch name_branch
+git switch name_branch
+git branch old_name new_name 
+git branch -d branch_name // git branch
+git branch -D branch_name // force fully @needed when branch not merge with main 
+git branch
+git stash -m "neww stash"     // use to save code when we dont want to add and need to work on diff branch
+git stash list
+git stash apply stash_no // which is avilable to see when list stash
+git stash drop  stash_no     // to drop stash after recover
+git stash clear // to drop all stash 
+git merge branch_name     // fast formard only main branch poinetrr shifet to other branch 
+git branch --merged // to show which branch is merged 
+git merge branch_name // isme jab hamari main brach m bhi commit ho jo feature rach me na ho aur feature me bhi commit ho jo main me na to to a new commit create hoga dono commit ko add karke then head point tot that commit 
+git merge --squash branch_name // used to combine all commit of a feature branch so we can commit only once to. main
+git merge // in case of conflict edit the conflict file then add and commit it again
+git merge --abort // to abort merging in case of conflict 
+git merge --continue // in case of conflict first git add then do git merge --continue 
+git merge --rebase // isme feture branch ka srt/bottum/base point karta h main k higest commit and all feature commit are newly created old were put a side
+git shortlog  // show logs of each developer 
