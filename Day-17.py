@@ -31,5 +31,26 @@ client = boto3.client('ec2')
 #         },
 #     ],
 # )
+# instance_id = response["Instances"][0]["InstanceId"]
+# print(response)
+# waiter = client.get_waiter("instance_running")
+# waiter.wait(InstanceIds=[instance_id])
+# print("sucessfully done")
+# response = client.describe_instances(
+#     InstanceIds=[
+#         'i-0f68a0e0165eff482',
+#     ],
+# )
 
+response = client.terminate_instances(
+    InstanceIds=[
+        'i-005c0f4ad53b2e5a2',
+    ],
+    Force=True,
+    SkipOsShutdown=False,
+)
+instance_id = response["TerminatingInstances"][0]["InstanceId"]
 print(response)
+waiter=client.get_waiter("instance_terminated")
+waiter.wait(InstanceIds=[instance_id])
+print("deleted sucessfully")
