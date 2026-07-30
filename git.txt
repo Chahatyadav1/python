@@ -13,7 +13,7 @@ git branch old_name new_name
 git branch -d branch_name // git branch
 git branch -D branch_name // force fully @needed when branch not merge with main 
 git branch
-git stash -m "neww stash"     // use to save code when we dont want to add and need to work on diff branch
+git stash -m "new stash"     // use to save code when we dont want to add and need to work on diff branch
 git stash list
 git stash apply stash_no // which is avilable to see when list stash
 git stash drop  stash_no     // to drop stash after recover
